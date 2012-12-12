@@ -14,5 +14,13 @@ describe 'testament' do
       result = testament('record echo foo')
       expect(result).to eq("foo\n")
     end
+
+    it 'records the execution of the command' do
+      testament('record echo foo')
+      last_line = `tail -n 1 testament.log`
+      command, execution_time = last_line.split("\t")
+      expect(command).to eq('echo foo')
+      expect(execution_time).to match(/\d+\.\d+/)
+    end
   end
 end

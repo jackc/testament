@@ -1,4 +1,13 @@
 #!/usr/bin/env ruby
 
 command = ARGV[1..-1].join(' ')
+
+start_time = Time.now
 system command
+end_time = Time.now
+
+elapsed_time = end_time - start_time
+
+open('testament.log', 'a') do |f|
+  f.puts [command, elapsed_time].join("\t")
+end
