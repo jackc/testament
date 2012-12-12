@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+command = ARGV[1..-1].join(' ')
+system command
