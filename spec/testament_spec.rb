@@ -1,4 +1,6 @@
 require 'rspec'
+require 'pry'
+require 'time' # for Time.parse
 
 RSpec.configure do |config|
   def testament(args="")
@@ -18,9 +20,13 @@ describe 'testament' do
     it 'records the execution of the command' do
       testament('record echo foo')
       last_line = `tail -n 1 testament.log`
-      command, execution_time = last_line.split("\t")
+      command, start_time, end_time = last_line.split(",")
       expect(command).to eq('echo foo')
-      expect(execution_time).to match(/\d+\.\d+/)
+
+      start_time = Time.parse(start_time) rescue nil
+      expect(start_time).to be
+      end_time = Time.parse(end_time) rescue nil
+      expect(end_time).to be
     end
   end
 end
