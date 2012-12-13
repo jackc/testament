@@ -1,5 +1,9 @@
 # Testament
 
+Note: readme driven development is being used -- not everything below will work yet!
+
+NOT READY FOR PRODUCTION USE
+
 Testament is a tool to track the cost of running tests.
 
 ## Installation

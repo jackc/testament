@@ -4,13 +4,13 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'testament/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = "test_timer"
+  gem.name          = "testament"
   gem.version       = Testament::VERSION
-  gem.authors       = ["Hashrocket Workstation"]
-  gem.email         = ["dev@hashrocket.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.authors       = ["Jack Christensen"]
+  gem.email         = ["jack@jackchristensen.com"]
+  gem.description   = %q{Time, record, and analyze test runs}
+  gem.summary       = %q{Time, record, and analyze test runs}
+  gem.homepage      = "https://github.com/JackC/testament"
 
   gem.add_development_dependency 'rspec', '>= 2.11.0'
   gem.add_development_dependency 'pry'
