@@ -46,4 +46,15 @@ describe 'testament' do
       expect(actual).to eq(expected)
     end
   end
+
+  context 'stats' do
+    before do
+      testament('record echo foo')
+    end
+
+    it 'outputs something' do
+      actual = testament 'stats'
+      expect(actual).to match(/Command/)
+    end
+  end
 end

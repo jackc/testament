@@ -20,4 +20,17 @@ class App < Thor
   def log
     puts Testament::CSVRepository.new('testament.log').log
   end
+
+  desc "stats", "print statistics"
+  def stats
+    require 'terminal-table'
+
+    rows = [
+      ['rake', '13', '14.259 seconds', '8:14']
+    ]
+
+    table = Terminal::Table.new :headings => ['Command', '# Records', 'Avg. Time', 'Total Time'], :rows => rows  
+    puts table
+  end
+
 end
