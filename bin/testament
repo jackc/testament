@@ -1,10 +1,5 @@
 #!/usr/bin/env ruby
-require 'testament/csv_repository'
+require 'testament'
+require 'testament/app'
 
-command = ARGV[1..-1].join(' ')
-
-start_time = Time.now
-system command
-end_time = Time.now
-
-Testament::CSVRepository.new('testament.log').store command, start_time, end_time
+App.start

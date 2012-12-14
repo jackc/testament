@@ -12,7 +12,12 @@ end
 
 describe 'testament' do
   context 'record' do
-    it 'execute it\'s argument' do
+    it 'executes a single word argument' do
+      result = testament('record pwd')
+      expect(`pwd`.chomp).to eq(FileUtils.pwd)
+    end
+
+    it 'executes a multiple word argument' do
       result = testament('record echo foo')
       expect(result).to eq("foo\n")
     end
