@@ -16,6 +16,10 @@ module Testament
       end
     end
 
+    def log
+      File.readlines(file_name)
+    end
+
     private
       def ensure_file_exists
         return if File.exist?(file_name)

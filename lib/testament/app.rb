@@ -15,4 +15,9 @@ class App < Thor
 
     Testament::CSVRepository.new('testament.log').store command, start_time, end_time
   end
+
+  desc "log", "print logs"
+  def log
+    puts Testament::CSVRepository.new('testament.log').log
+  end
 end

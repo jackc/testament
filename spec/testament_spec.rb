@@ -34,4 +34,16 @@ describe 'testament' do
       expect(end_time).to be
     end
   end
+
+  context 'log' do
+    before do
+      testament('record echo foo')
+    end
+
+    it 'outputs the previously logged data' do
+      expected = File.read 'testament.log'
+      actual = testament 'log'
+      expect(actual).to eq(expected)
+    end
+  end
 end
