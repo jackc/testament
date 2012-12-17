@@ -11,12 +11,12 @@ module Testament
     def create_schema
       db.create_table :executions do
         primary_key :id, type: Bignum
-        String :project, null: false, index: true
-        String :command, null: false, index: true
-        Time :start_time, null: false, index: true
-        Time :end_time, null: false
-        String :user, index: true
-        String :version, index: true
+        String :project, null: false
+        String :command, null: false
+        Time :start_time, null: false
+        Fixnum :elapsed_milliseconds, null: false
+        String :user
+        String :version
       end
 
       db.create_table :tags do

@@ -21,12 +21,12 @@ describe Testament::Database do
 
   describe 'record' do
     before { database.create_schema }
-    
+
     it 'inserts row in executions table' do
       database.record project: 'testament',
         command: 'record',
         start_time: Time.now,
-        end_time: Time.now,
+        elapsed_milliseconds: 42,
         user: 'jack',
         version: '12345678abcdef'
 

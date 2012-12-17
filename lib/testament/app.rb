@@ -29,8 +29,9 @@ class App < Thor
     start_time = Time.now
     system command
     end_time = Time.now
+    elapsed_milliseconds = ((end_time - start_time) * 1000).round
 
-    database.record project: CONFIG.fetch('project'), command: command, start_time: start_time, end_time: end_time, user: 'foo', version: 'foo'
+    database.record project: CONFIG.fetch('project'), command: command, start_time: start_time, elapsed_milliseconds: elapsed_milliseconds, user: 'foo', version: 'foo'
   end
 
   desc "log", "print logs"
@@ -50,7 +51,7 @@ class App < Thor
     require 'testament/database'
     database = Testament::Database.new CONFIG['database']
 
-    rows = database.db["select command, count(*) as execution_count, avg(end_time - start_time) as average_time, sum(end_time - start_time) as total_time from executions group by command"].all.map do |h|
+    rows = database.db["select command, count(*) as execution_count, avg(elapsed_milliseconds) / 1000.0 as average_time, sum(elapsed_milliseconds) / 1000.0 as total_time from executions group by command"].all.map do |h|
       [h[:command], h[:execution_count], h[:average_time], h[:total_time]]
     end
 
