@@ -21,16 +21,15 @@ class App < Thor
 
   desc "record COMMAND", "record and execute COMMAND"
   def record(*command_words)
-    Testament.load_config
-    require 'testament/database'
-    database = Testament::Database.new CONFIG.fetch('database')
-
     command = command_words.join(' ')
     start_time = Time.now
     system command
     end_time = Time.now
     elapsed_milliseconds = ((end_time - start_time) * 1000).round
 
+    Testament.load_config
+    require 'testament/database'
+    database = Testament::Database.new CONFIG.fetch('database')
     database.record project: CONFIG.fetch('project'), command: command, start_time: start_time, elapsed_milliseconds: elapsed_milliseconds, user: 'foo', version: 'foo'
   end
 
