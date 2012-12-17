@@ -1,14 +1,15 @@
 require 'sequel'
 
 module Testament
-  module Database
-    def self.connect(options)
-      db = Sequel.connect options
-      ::Object.const_set(:DB, db)
+  class Database
+    attr_reader :db
+
+    def initialize(connection_parameters)
+      @db = Sequel.connect connection_parameters
     end
 
-    def self.create_schema
-      DB.create_table :executions do
+    def create_schema
+      db.create_table :executions do
         primary_key :id, type: Bignum
         String :project, null: false, index: true
         String :command, null: false, index: true
@@ -18,12 +19,12 @@ module Testament
         String :version, index: true
       end
 
-      DB.create_table :tags do
+      db.create_table :tags do
         primary_key :id
         String :name, null: false, index: true
       end
 
-      DB.create_join_table execution_id: :executions, tag_id: :tags
+      db.create_join_table execution_id: :executions, tag_id: :tags
     end
   end
 

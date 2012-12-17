@@ -15,31 +15,31 @@ class App < Thor
     directory ".testament", ".testament"
 
     require 'testament/database'
-    Testament::Database.connect adapter: :sqlite, database: "#{path}/.testament/db.sqlite"
-    Testament::Database.create_schema
+    database = Testament::Database.new adapter: :sqlite, database: "#{path}/.testament/db.sqlite"
+    database.create_schema
   end
 
   desc "record COMMAND", "record and execute COMMAND"
   def record(*command_words)
     Testament.load_config
     require 'testament/database'
-    Testament::Database.connect CONFIG.fetch('database')
+    database = Testament::Database.new CONFIG.fetch('database')
 
     command = command_words.join(' ')
     start_time = Time.now
     system command
     end_time = Time.now
 
-    DB[:executions].insert project: CONFIG.fetch('project'), command: command, start_time: start_time, end_time: end_time, user: 'foo', version: 'foo'
+    database.db[:executions].insert project: CONFIG.fetch('project'), command: command, start_time: start_time, end_time: end_time, user: 'foo', version: 'foo'
   end
 
   desc "log", "print logs"
   def log
     Testament.load_config
     require 'testament/database'
-    Testament::Database.connect CONFIG['database']
+    database = Testament::Database.new CONFIG['database']
     
-    puts DB[:executions].order(:start_time).all
+    puts database.db[:executions].order(:start_time).all
   end
 
   desc "stats", "print statistics"
@@ -48,9 +48,9 @@ class App < Thor
 
     Testament.load_config
     require 'testament/database'
-    Testament::Database.connect CONFIG['database']
+    database = Testament::Database.new CONFIG['database']
 
-    rows = DB["select command, count(*) as execution_count, avg(end_time - start_time) as average_time, sum(end_time - start_time) as total_time from executions group by command"].all.map do |h|
+    rows = database.db["select command, count(*) as execution_count, avg(end_time - start_time) as average_time, sum(end_time - start_time) as total_time from executions group by command"].all.map do |h|
       [h[:command], h[:execution_count], h[:average_time], h[:total_time]]
     end
 
