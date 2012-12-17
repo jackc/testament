@@ -15,7 +15,7 @@ describe 'testament' do
   let(:directory) { File.expand_path(File.join(File.dirname(__FILE__), 'tmp', SecureRandom.hex)) }
 
   before do
-    FileUtils.mkdir directory
+    FileUtils.mkdir_p directory
   end
 
   after do
