@@ -1,0 +1,5 @@
+project: <%= app_name %>
+
+database:
+  adapter: sqlite
+  database: .testament/db.sqlite
