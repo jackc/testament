@@ -26,6 +26,10 @@ module Testament
 
       db.create_join_table execution_id: :executions, tag_id: :tags
     end
+
+    def record(attributes)
+      db[:executions].insert attributes
+    end
   end
 
 end

@@ -30,7 +30,7 @@ class App < Thor
     system command
     end_time = Time.now
 
-    database.db[:executions].insert project: CONFIG.fetch('project'), command: command, start_time: start_time, end_time: end_time, user: 'foo', version: 'foo'
+    database.record project: CONFIG.fetch('project'), command: command, start_time: start_time, end_time: end_time, user: 'foo', version: 'foo'
   end
 
   desc "log", "print logs"
