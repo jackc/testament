@@ -1,7 +1,7 @@
 require 'thor'
 require 'thor/group'
 
-class App < Thor
+class CLI < Thor
   include Thor::Actions
 
   source_root(File.join(File.dirname(__FILE__), "generators"))

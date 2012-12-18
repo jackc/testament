@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 require 'testament'
-require 'testament/app'
+require 'testament/cli'
 
-App.start
+CLI.start
