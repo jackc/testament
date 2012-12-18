@@ -32,8 +32,12 @@ module Testament
     end
 
     def stats
-      rows = database.db["select command, count(*) as execution_count, avg(elapsed_milliseconds) / 1000.0 as average_time, sum(elapsed_milliseconds) / 1000.0 as total_time from executions group by command"].all.map do |h|
-        [h[:command], h[:execution_count], h[:average_time], h[:total_time]]
+      rows = database.db[:executions]
+        .group_and_count(:project, :command)
+        .select_append{(avg(elapsed_milliseconds) / 1000.0).as('average_time')}
+        .select_append{(sum(elapsed_milliseconds) / 1000.0).as('total_time')}
+        .all.map do |h|
+        [h[:project], h[:command], h[:count], h[:average_time], h[:total_time]]
       end
     end
 
