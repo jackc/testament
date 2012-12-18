@@ -4,6 +4,7 @@
 project: <%= app_name %>
 user: <%%= require 'etc'; Etc.getlogin %>
 version: <%%= `git rev-parse --verify HEAD`.chomp %>
+default_category: test
 
 database:
   adapter: sqlite

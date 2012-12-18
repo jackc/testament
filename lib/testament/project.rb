@@ -4,13 +4,14 @@ require 'testament/database'
 
 module Testament
   class Project
-    attr_reader :name, :user, :version
+    attr_reader :name, :user, :version, :default_category
 
     def initialize(arguments)
       @database = Database.new arguments.fetch('database')
       @name = arguments.fetch('project')
       @user = arguments.fetch('user')
       @version = arguments.fetch('version')
+      @default_category = arguments.fetch('default_category')
     end
 
     def record(command)
@@ -24,7 +25,8 @@ module Testament
         start_time: start_time,
         elapsed_milliseconds: elapsed_milliseconds,
         user: user,
-        version: version
+        version: version,
+        category: default_category
     end
 
     def log

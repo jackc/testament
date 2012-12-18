@@ -15,16 +15,10 @@ module Testament
         String :command, null: false
         Time :start_time, null: false
         Fixnum :elapsed_milliseconds, null: false
-        String :user
-        String :version
+        String :user, null: false
+        String :version, null: false
+        String :category, null: false
       end
-
-      db.create_table :tags do
-        primary_key :id
-        String :name, null: false, index: true
-      end
-
-      db.create_join_table execution_id: :executions, tag_id: :tags
     end
 
     def record(attributes)

@@ -9,14 +9,6 @@ describe Testament::Database do
     it 'creates executions table' do
       expect(database.db.tables).to include(:executions)
     end
-
-    it 'creates tags table' do
-      expect(database.db.tables).to include(:tags)
-    end
-
-    it 'creates executions_tags table' do
-      expect(database.db.tables).to include(:executions_tags)
-    end
   end
 
   describe 'record' do
@@ -28,7 +20,8 @@ describe Testament::Database do
         start_time: Time.now,
         elapsed_milliseconds: 42,
         user: 'jack',
-        version: '12345678abcdef'
+        version: '12345678abcdef',
+        category: 'test'
 
       expect(database.db[:executions].count).to eq(1)
     end
