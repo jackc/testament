@@ -1,4 +1,9 @@
+# This file is run through ERB. This means you can use any arbitrary
+# code to find the user name and project version
+
 project: <%= app_name %>
+user: <%%= require 'etc'; Etc.getlogin %>
+version: <%%= `git rev-parse --verify HEAD`.chomp %>
 
 database:
   adapter: sqlite

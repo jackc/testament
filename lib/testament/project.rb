@@ -1,13 +1,16 @@
 require 'yaml'
+require 'erb'
 require 'testament/database'
 
 module Testament
   class Project
-    attr_reader :name
+    attr_reader :name, :user, :version
 
     def initialize(arguments)
       @database = Database.new arguments.fetch('database')
       @name = arguments.fetch('project')
+      @user = arguments.fetch('user')
+      @version = arguments.fetch('version')
     end
 
     def record(command)
@@ -20,8 +23,8 @@ module Testament
         command: command,
         start_time: start_time,
         elapsed_milliseconds: elapsed_milliseconds,
-        user: 'foo',
-        version: 'foo'
+        user: user,
+        version: version
     end
 
     def log
@@ -36,7 +39,7 @@ module Testament
 
     def self.load
       config_path = ".testament/config.yml"
-      config = YAML.load(File.read(config_path))
+      config = YAML.load(ERB.new(File.read(config_path)).result)
       new config
     end
 
