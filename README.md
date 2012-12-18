@@ -1,9 +1,5 @@
 # Testament
 
-Note: readme driven development is being used -- not everything below will work yet!
-
-NOT READY FOR PRODUCTION USE
-
 Testament is a tool to track the cost of running tests.
 
 ## Installation
@@ -12,9 +8,15 @@ Testament is a tool to track the cost of running tests.
 
 ## Usage
 
+To setup testament with your project run testament init on your project directory.
+
+    $ testament init .
+
+This will create a .testament directory with the project config and the SQLite database that will store the test run information.  
+
 To track the time it takes to run your specs, run them like this every time:
 
-    $ testament record rspec spec/
+    $ testament record rspec spec
 
 If you have your default rake task set to run your whole test suite, then you can do this:
 
@@ -22,13 +24,25 @@ If you have your default rake task set to run your whole test suite, then you ca
 
 You may want to create an alias to rake and rspec to run it with testament track automatically.
 
-## Seeing Trends
+## Reports
 
-To view some stats, run this:
+To view the default report, run the following in your project folder:
 
-    $ testament stats
+    $ testament report
 
-in your project folder.
+This will yield output like this:
+
+    +-----------+---------+-------+--------------+------------+
+    | Project   | Command | Count | Average time | Total time |
+    +-----------+---------+-------+--------------+------------+
+    | testament | rspec   | 4     | 6.03675      | 24.147     |
+    +-----------+---------+-------+--------------+------------+
+
+To see a report from just today run the following:
+
+    $ testament report today
+
+The report definitions are stored in .testament/report. You can edit the existing reports or create new ones.
 
 ## Contributing
 
