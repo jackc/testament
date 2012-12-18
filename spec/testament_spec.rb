@@ -69,9 +69,14 @@ describe 'testament' do
       testament('record echo foo')
     end
 
-    it 'outputs something' do
+    it 'runs default report when no name given' do
       actual = testament 'report'
       expect(actual).to match(/Command/)
+    end
+
+    it 'runs report by name' do
+      actual = testament 'report today'
+      expect(actual).to match(/echo foo/)
     end
   end
 end
