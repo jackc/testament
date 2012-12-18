@@ -13,7 +13,7 @@ module Testament
     class Loader
       def load
         report_paths.each do |report_path|
-          load report_path
+          ::Kernel.load report_path
         end 
       end
 
