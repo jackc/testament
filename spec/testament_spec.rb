@@ -7,7 +7,7 @@ RSpec.configure do |config|
   def testament(args="")
     lib = File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
     bin = File.expand_path(File.join(File.dirname(__FILE__), '..', 'bin', 'testament'))
-    `ruby -I #{lib} #{bin} #{args}`
+    `cd #{directory}; ruby -I #{lib} #{bin} #{args}`
   end
 end
 
@@ -53,6 +53,7 @@ describe 'testament' do
 
   context 'log' do
     before do
+      testament "init #{directory}"
       testament('record echo foo')
     end
 
@@ -64,6 +65,7 @@ describe 'testament' do
 
   context 'stats' do
     before do
+      testament "init #{directory}"
       testament('record echo foo')
     end
 
