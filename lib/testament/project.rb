@@ -31,9 +31,9 @@ module Testament
       database.db[:executions].order(:start_time).all
     end
 
-    def stats
-      require 'testament/reports/default'
-      Testament::Report::Default.new database.db
+    def report(name)
+      require 'testament/report'
+      Testament::Report.find(name).new database.db
     end
 
     def self.load

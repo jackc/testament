@@ -63,14 +63,14 @@ describe 'testament' do
     end
   end
 
-  context 'stats' do
+  context 'report' do
     before do
       testament "init #{directory}"
       testament('record echo foo')
     end
 
     it 'outputs something' do
-      actual = testament 'stats'
+      actual = testament 'report'
       expect(actual).to match(/Command/)
     end
   end

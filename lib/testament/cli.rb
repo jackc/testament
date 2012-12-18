@@ -33,11 +33,11 @@ class CLI < Thor
     puts project.log
   end
 
-  desc "stats", "print statistics"
-  def stats
+  desc "report", "run a report"
+  def report(name='default')
     require 'terminal-table'
     project = Testament::Project.load
-    report = project.stats
+    report = project.report name
     table = Terminal::Table.new :headings => report.headers, :rows => report.rows
     puts table
   end
