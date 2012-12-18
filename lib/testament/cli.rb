@@ -1,6 +1,7 @@
 require 'thor'
 require 'thor/group'
 require 'testament/project'
+require 'testament/report'
 
 class CLI < Thor
   include Thor::Actions
@@ -33,7 +34,13 @@ class CLI < Thor
     puts project.log
   end
 
-  desc "report", "run a report"
+  desc "report [REPORT_NAME]", "run REPORT_NAME"
+  long_desc <<-END_TXT
+Reports are stored in .testament/report. You can alter or create new reports
+there.
+
+Available reports: #{Testament::Report::Loader.new.report_names.join(' ')}
+END_TXT
   def report(name='default')
     require 'terminal-table'
     project = Testament::Project.load
@@ -41,5 +48,4 @@ class CLI < Thor
     table = Terminal::Table.new :headings => report.headers, :rows => report.rows
     puts table
   end
-
 end
