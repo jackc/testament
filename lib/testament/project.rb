@@ -32,13 +32,8 @@ module Testament
     end
 
     def stats
-      rows = database.db[:executions]
-        .group_and_count(:project, :command)
-        .select_append{(avg(elapsed_milliseconds) / 1000.0).as('average_time')}
-        .select_append{(sum(elapsed_milliseconds) / 1000.0).as('total_time')}
-        .all.map do |h|
-        [h[:project], h[:command], h[:count], h[:average_time], h[:total_time]]
-      end
+      require 'testament/reports/default'
+      Testament::Report::Default.new database.db
     end
 
     def self.load

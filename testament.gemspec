@@ -12,6 +12,7 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{Time, record, and analyze test runs}
   gem.homepage      = "https://github.com/JackC/testament"
 
+  gem.add_dependency 'activesupport', '~> 3.2.9'
   gem.add_dependency 'sequel', '~> 3.42.0'
   gem.add_dependency 'sqlite3', '~> 1.3.6'
   gem.add_dependency 'terminal-table', '~> 1.4.5'

@@ -37,8 +37,8 @@ class CLI < Thor
   def stats
     require 'terminal-table'
     project = Testament::Project.load
-    rows = project.stats
-    table = Terminal::Table.new :headings => ['Project', 'Command', '# Records', 'Avg. Time', 'Total Time'], :rows => rows
+    report = project.stats
+    table = Terminal::Table.new :headings => report.headers, :rows => report.rows
     puts table
   end
 
