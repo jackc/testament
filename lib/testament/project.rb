@@ -14,12 +14,13 @@ module Testament
       @default_category = arguments.fetch('default_category')
     end
 
-    def record(command)
+    def record(command_words)
       start_time = Time.now
-      system command
+      system *command_words
       end_time = Time.now
       elapsed_milliseconds = ((end_time - start_time) * 1000).round
 
+      command = command_words.join(' ')
       database.record project: name,
         command: command,
         start_time: start_time,

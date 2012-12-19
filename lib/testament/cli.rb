@@ -23,9 +23,9 @@ class CLI < Thor
 
   desc "record COMMAND", "record and execute COMMAND"
   def record(*command_words)
-    command = command_words.join(' ')
     project = Testament::Project.load
-    project.record command
+    project.record command_words
+    exit $?.exitstatus
   end
 
   desc "log", "print logs"

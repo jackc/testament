@@ -49,6 +49,11 @@ describe 'testament' do
       output = testament 'log'
       expect(output).to match(/echo foo/)
     end
+
+    it 'returns the return code of the executed commnd' do
+      testament "record ruby -e 'exit 1'"
+      expect($?.exitstatus).to eq(1)
+    end
   end
 
   context 'log' do
