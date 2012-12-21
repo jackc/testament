@@ -15,6 +15,7 @@ module Testament
         String :command, null: false
         Time :start_time, null: false
         Fixnum :elapsed_milliseconds, null: false
+        Fixnum :exit_status, null: false
         String :user, null: false
         String :version, null: false
         String :category, null: false

@@ -19,6 +19,7 @@ describe Testament::Database do
         command: 'record',
         start_time: Time.now,
         elapsed_milliseconds: 42,
+        exit_status: 0,
         user: 'jack',
         version: '12345678abcdef',
         category: 'test'
